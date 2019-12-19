@@ -1,0 +1,178 @@
+<apex:page docType="html-5.0" controller="preChatFormController">
+    
+    <script type="text/javascript">
+    (function() { 
+        function handlePageLoad() {
+            var endpointMatcher = new RegExp("[\\?\\&]endpoint=([^&#]*)");
+            document.getElementById('prechatForm').setAttribute('action',
+                                                                decodeURIComponent(endpointMatcher.exec(document.location.search)[1]));
+        } 
+        if (window.addEventListener) {
+            window.addEventListener('load', handlePageLoad, false);
+        } else { 
+            window.attachEvent('onload', handlePageLoad, false);
+        }
+    })(); 
+    </script>
+    
+    <span style="font-size: 20px;
+                 background-color: #333;
+                 color: #fff;width:305px;display:block;float:left;"><center><h1 >JUNGLEE RUMMY SUPPORT</h1></center></span><br/><br/><br/>
+    
+    <form method="post" id="prechatForm">
+        <!-- Detail inputs -->
+        
+        Question: <br/><input type='text' style="width:277px;" name='liveagent.prechat:CaseSubject' id='Question' required="true"/><br /><br/>
+        Welcome to Junglee Rummy Chat - India's Most-Trusted<br/> Rummy Site.<br/><br/>
+        Please type your query before starting the chat.<br/><br/>
+        Please note Your withdrawals will not be processed if you<br/> are not KYC verified. Verify your KYC now!
+        <input type="hidden" name="liveagent.prechat:contactLastName" value="{!userId}"/><br />
+        <input type="hidden" name="liveagent.prechat:contactEmail" value="{!userEmail}"/><br />
+        
+        <!--Subject: <input type="text" name="liveagent.prechat:caseSubject" /><br />-->
+        
+        <!-- Map the detail inputs to the Contact fields --> 
+        <input type="hidden" name="liveagent.prechat.findorcreate.map:Contact" value="LastName,contactLastName;Email,contactEmail;" />
+        
+        <!-- Try to find the Contact by email (exact match) -->
+        <input type="hidden" name="liveagent.prechat.findorcreate.map.doFind:Contact" value="Email,true;" />
+        <input type="hidden" name="liveagent.prechat.findorcreate.map.isExactMatch:Contact" value="Email,true;" />
+        
+        <!-- If the Contact is not found, then create one with the following fields set -->
+        <input type="hidden" name="liveagent.prechat.findorcreate.map.doCreate:Contact" value="LastName,true;Email,true;" />
+        
+        <!-- Save the Contact on the Live Chat Transcript's Contact Loookup -->
+        <input type="hidden" name="liveagent.prechat.findorcreate.saveToTranscript:Contact" value="Contact" />
+        
+        <!-- Show the Contact when it is found or created -->
+        <input type="hidden" name="liveagent.prechat.findorcreate.showOnCreate:Contact" value="true" />
+        
+        <!-- Create a Case every time -->
+        <input type="hidden" name="liveagent.prechat:caseOrigin" value="Chat" />
+        <input type="hidden" name="liveagent.prechat.findorcreate.map:Case" value="Origin,caseOrigin;Subject,caseSubject;" />
+        <input type="hidden" name="liveagent.prechat.findorcreate.map.doCreate:Case" value="Origin,true;Subject,true;" />
+        <input type="hidden" name="liveagent.prechat.findorcreate.saveToTranscript:Case" value="Case" />
+        <input type="hidden" name="liveagent.prechat.findorcreate.showOnCreate:Case" value="true" />
+        
+        <!-- Link the Contact to the Case -->
+        <input type= "hidden" name="liveagent.prechat.findorcreate.linkToEntity:Contact" value="Case,ContactId" />
+        
+        <input type="submit" style="font-size: 20px;background-color: #333;color: #fff;width:305px;" value="START THE CHAT" id="prechat_submit" onclick="setName()" return="false"/>
+        
+        <!-- Set the visitor's name for the agent in the Console to first and last name provided by the customer -->
+        <script type="text/javascript">
+        function setName() {
+            if(document.getElementById("Question").value==""){
+                alert("Please fill up the question.");
+            }
+        }
+        </script>
+        
+        <style type="text/css">
+            p {font-weight: bolder }
+        </style>
+        
+        <style>
+        .picklist{
+        width:300px;
+        height:30px;
+        background: #fff;
+        border: 1px solid #CCCCCC;
+        border-radius: 5px;
+        margin-bottom: 5px;
+        padding: 0 10px;
+        }
+        select{
+        width:300px;
+        height:30px;
+        background: #fff;
+        border: 1px solid #CCCCCC;
+        border-radius: 5px;
+        margin-bottom: 5px;
+        padding: 0 10px;
+        }
+        .textarea{
+        width:450px;
+        height: 100px;
+        background: #fff;
+        border: 1px solid #CCCCCC;
+        border-radius: 5px;
+        margin-bottom: 5px;
+        padding: 0 10px;
+        }
+    </style>
+    
+    <style>
+        body{
+        background-color:#fff;
+        }
+        #chatFormDiv
+        {
+        width:300px;
+        text-align:center;
+        padding:5px;
+        }
+        #chatHeader
+        {
+        color:#6d6d6d;
+        font-size:18px;
+        font-weight:bold;
+        float: center;
+        }
+        #prechat_submit
+        {
+        font-weight:bold;
+        float: center;
+        }
+        label
+        {
+        width:150px;
+        font-weight:bold;
+        }
+        input[type=text], textarea
+        {
+        height: 50px;
+        width:225px;
+        background: #fff;
+        border: 1px solid #CCCCCC;
+        border-radius: 5px;
+        margin-bottom: 5px;
+        padding: 0 10px;
+        }
+        input[type=email]
+        {
+        height: 30px;
+        width:225px;
+        background: #fff;
+        border: 1px solid #CCCCCC;
+        border-radius: 3px;
+        margin-bottom: 5px;
+        padding: 0 10px;
+        }
+        input[type=tel]
+        {
+        height: 30px;
+        width:280px;
+        background: #fff;
+        border: 1px solid #CCCCCC;
+        border-radius: 3px;
+        margin-bottom: 5px;
+        padding: 0 10px;
+        }
+        input[type=text]
+        {
+        height: 30px;
+        }
+        textarea{
+        height:100px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        }
+        .chatStatusDiv
+        {
+        display:none;
+        }
+    </style>
+        
+    </form> 
+</apex:page>

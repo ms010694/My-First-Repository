@@ -1,0 +1,11 @@
+.THIS {
+}
+.THIS.slds-card {
+   
+    width: 320px;
+    height: 498px;
+    background-color:grey;
+}
+.THIS .slds-textarea {
+    width:270px;
+}
